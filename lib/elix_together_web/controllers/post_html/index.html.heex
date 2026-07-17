@@ -1,0 +1,71 @@
+<div id="posts-card-wrapper" phx-update="ignore">
+  <div id="instructions-card" class="floating-card" data-key="posts-tech-info">
+    <header class="card-header" data-drag-handle>
+      <strong class="card-title">Posts — Tech Overview</strong>
+      <div class="card-controls">
+        <button type="button" class="control-btn" id="instr-minimise">—</button>
+      </div>
+    </header>
+      <p class="small">Tip: drag this floating card to move around. Your position is saved locally.</p>
+    
+    <div class="card-body">
+      <div class="steps">
+        <span class="sentence">
+          This LiveView loads posts from the database and renders them dynamically without page reloads.
+        </span>
+        <span class="sentence">
+          Navigation uses LiveView’s built‑in link helpers for seamless transitions to show and edit pages.
+        </span>
+        <span class="sentence">
+          Delete actions use method spoofing and LiveView events to remove posts instantly.
+        </span>
+        <span class="sentence">
+          Comment counts are fetched per post and displayed alongside the preview.
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+ <.link href={~p"/"}> 🚚 Back to Home</.link>
+<section class="max-w-2xl mx-auto mt-12 p-6 bg-white rounded-lg shadow-md space-y-6">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-zinc-800">📚 Listing Posts</h1>
+    <.link href={~p"/posts/new"}>
+      <.button class="bg-brand text-white hover:bg-brand/80 px-4 py-2 rounded-md shadow">
+        ➕ New Post
+      </.button>
+    </.link>
+  </div>
+
+  <div class="grid gap-6">
+    <%= for post <- @posts do %>
+      <div class="border-b border-gray-200 py-4">
+        <!-- Title -->
+        <h2 class="font-semibold text-zinc-800 mb-2">{post.title}</h2>
+        
+<!-- Body + Comments side by side -->
+        <div class="flex items-center justify-between text-sm text-zinc-600 mb-2">
+          <p class="line-clamp-2">{post.body}</p>
+          <span class="ml-4 text-zinc-500">{get_comments_count(post.id)} comments</span>
+        </div>
+        
+<!-- Actions -->
+        <div class="flex gap-3 text-sm">
+          <.link navigate={~p"/posts/#{post}"} class="text-brand hover:underline">Show</.link>
+          <.link navigate={~p"/posts/#{post}/edit"} class="text-blue-600 hover:underline">
+            Edit
+          </.link>
+          <.link
+            href={~p"/posts/#{post}"}
+            method="delete"
+            data-confirm="Are you sure?"
+            class="text-red-600 hover:underline"
+          >
+            Delete
+          </.link>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>
+

@@ -1,0 +1,50 @@
+<div id="posts-card-wrapper" phx-update="ignore">
+  <div id="instructions-card" class="floating-card" data-key="playground-instructions">
+    <header class="card-header" data-drag-handle>
+      <strong class="card-title">URL parameter greeting</strong>
+      <div class="card-controls">
+        <button type="button" class="control-btn" id="instr-minimise">—</button>
+      </div>
+    </header>
+      <p class="small">Tip: drag this floating card to move around. Your position is saved locally.</p>
+    
+    <div class="card-body">
+      <div class="steps">
+        <span class="sentence">Visiting <code>/playground/goofy</code>
+      extracts <code>"goofy"</code> as <code>urlEntry</code>,
+      passes it into the controller, and renders the template that shows Hello World, from 'word'.
+     
+      </span>
+      </div>
+    </div>
+  </div>
+</div>
+ <.link href={~p"/"}> 🚚 Back to Home</.link>
+<section class="max-w-2xl mx-auto mt-12 p-6 bg-white rounded-lg shadow-md space-y-6">
+  <!-- Greeting -->
+  <h2 class="text-2xl font-bold text-indigo-700">
+    Hello World, from <span class="text-green-500"><%= @urlEntry %></span>!
+  </h2>
+
+  <div class="mt-8 p-4 bg-gray-50 rounded-md border border-gray-200">
+    <h3 class="text-lg font-semibold text-gray-800 mb-2">🔧 Page Mechanics</h3>
+
+    <p class="text-sm text-gray-500 mb-2">
+      This page is powered by a Phoenix route and controller:
+    </p>
+    <pre class="bg-gray-900 text-green-200 text-sm p-3 rounded-md overflow-x-auto">
+    <%= raw """
+    Route:
+      get "/playground/:urlEntry", InputANDUrlController, :showFromUrl
+
+    Controller:
+      def showFromUrl(conn, %{"urlEntry" => urlEntry}) do
+        render(conn, :showFromUrl, urlEntry: urlEntry)
+      end
+    """ %>
+    </pre>
+    <p class="text-xs text-gray-500 mt-2">
+      Try replacing the word "goofy" with another word in the URL.
+    </p>
+  </div>
+</section>

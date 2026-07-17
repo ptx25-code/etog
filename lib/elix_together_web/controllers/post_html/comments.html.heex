@@ -1,0 +1,17 @@
+<h2 class="text-lg font-bold mb-4">Comments:</h2>
+
+<div class="comments">
+  <div class="comment header grid grid-cols-2 gap-4 font-semibold border-b pb-2">
+    <div>Name</div>
+
+    <div>Content</div>
+  </div>
+
+  <%= for comment <- @comments do %>
+    <div class="comment grid grid-cols-2 gap-4 border-b py-2">
+      <div>{comment.name}</div>
+
+      <div>{comment.content}</div>
+    </div>
+  <% end %>
+</div>

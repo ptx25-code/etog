@@ -1,0 +1,22 @@
+<section class="max-w-2xl mx-auto mt-12 p-6 bg-white rounded-lg shadow-md space-y-6">
+  <.header>
+    Show Post {@post.id}
+    <:subtitle>This is a post record from your database.</:subtitle>
+    <:actions>
+      <.link href={~p"/posts/#{@post}/edit"}>
+        <.button>Edit post</.button>
+      </.link>
+    </:actions>
+  </.header>
+
+  <.list>
+    <:item title="Title">{@post.title}</:item>
+    <:item title="Body">{@post.body}</:item>
+  </.list>
+
+  <.comments comments={@post.comments} />
+
+  <.comment_form post={@post} changeset={@changeset} />
+
+  <.back navigate={~p"/posts"}>Back to posts</.back>
+</section>
